@@ -1,22 +1,36 @@
+const User = require('../models/User');
+
 class UserController{
-    index(req, res){
-        res.json('index');
+    async index(req, res){
+        return res.json(await User.find());
     }
 
-    store(req, res){
-        res.json('store');
+    async store(req, res){
+        const {username} = req.body;
+        const newUser = new User({
+            username
+        });
+        return res.status(201).json(await newUser.save());
     }
 
-    find(req, res){
-        res.json('find')
+    async find(req, res){
+        const {id} = req.params;
+        return res.json(await User.findById(id));
     }
 
-    update(req, res){
-        res.json('update');
+    async update(req, res){
+        const {id}  = req.params;
+        const {username} = req.body;
+        await User.updateOne({_id: id}, {
+            username
+        });
+        return res.json({message: "Updated successfully."});
     }
 
-    destroy(req, res){
-        res.json('destroy')
+    async destroy(req, res){
+        const {id} = req.params;
+        await User.deleteOne({_id: id});
+        return res.json({message: "Deleted successfully."});
     }
 }
 
