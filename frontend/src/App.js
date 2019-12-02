@@ -14,10 +14,12 @@ function App() {
   return (
       <Router>
           <Navigation/>
-          <Route path="/" component={TasksList} exact/>
-          <Route path="/edit/:id" component={TasksEdit}/>
-          <Route path="/create" component={TasksCreate}/>
-          <Route path="/users" component={UserList}/>
+          <section className="container p-4">
+              <Route path="/" component={TasksList} exact/>
+              <Route path="/edit/:id" component={TasksEdit}/>
+              <Route path="/create" component={TasksCreate}/>
+              <Route path="/users" component={UserList}/>
+          </section>
       </Router>
   );
 }
