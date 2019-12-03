@@ -32,7 +32,7 @@ export default class UserList extends Component {
                     <ul className="list-group">
                         {
                             this.state.users.map(user =>
-                                <User getUsers={this.getUsers} user={user}/>
+                                <User key={user._id} getUsers={this.getUsers} user={user}/>
                             )
                         }
                     </ul>
