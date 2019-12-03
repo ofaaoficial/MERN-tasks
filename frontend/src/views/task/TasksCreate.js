@@ -3,6 +3,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 
 export default class TasksCreate extends Component {
+
     state = {
         tasks: [],
         users: [],
@@ -11,24 +12,15 @@ export default class TasksCreate extends Component {
         content: undefined,
         author: undefined,
         date: new Date()
-
     };
 
     componentDidMount() {
-        this.getTasks();
         this.getUsers();
     }
 
     constructor(props) {
         super(props);
     }
-
-    getTasks = async () => {
-        const response = await axios.get('http://localhost:4000/api/tasks');
-        this.setState({
-            tasks: response.data
-        });
-    };
 
     getUsers = async () => {
         const response = await axios.get('http://localhost:4000/api/users');
