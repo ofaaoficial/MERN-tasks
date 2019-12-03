@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.min.css';
+import {format} from 'timeago.js';
 
 export default class TasksList extends Component {
 
@@ -40,7 +40,7 @@ export default class TasksList extends Component {
                                         <p>{task.content}</p>
                                     </section>
                                     <section className="card-footer">
-                                        <span>{task.date} - {task.author}</span>
+                                        <span>{format(task.date)} - {task.author}</span>
                                     </section>
                                 </article>
                             </section>
