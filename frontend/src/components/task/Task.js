@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {format} from "timeago.js";
-import axios from 'axios';
 import {Link} from "react-router-dom";
+import {deleteTask} from '../../resources/Tasks';
 
 export default class Task extends Component {
 
     deleteTask = async id => {
-        const {getTasks} = this.props;
-        const response = await axios.delete(`http://localhost:4000/api/tasks/${id}`);
+        const {callGetTasks} = this.props;
+        const response = await deleteTask(id);
 
-        if(response.status === 200) getTasks();
-
+        if(response.status === 200) callGetTasks();
     };
 
 

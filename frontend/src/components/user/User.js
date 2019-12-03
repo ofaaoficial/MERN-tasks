@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import axios from "axios";
+import {deleteUser} from '../../resources/Users';
 
 export default class User extends Component {
 
     deleteUser = async id => {
         const {getUsers} = this.props;
-        const response = await axios.delete(`http://localhost:4000/api/users/${id}`);
+        const response = await deleteUser(id);
 
         if (response.status === 200) getUsers();
         else alert("No get data");

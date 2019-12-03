@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import UserForm from '../../components/user/UserForm';
 import User from '../../components/user/User';
+import {getUsers} from "../../resources/Users";
 
 export default class UserList extends Component {
 
@@ -14,7 +14,7 @@ export default class UserList extends Component {
     }
 
     getUsers = async () => {
-        const response = await axios.get('http://localhost:4000/api/users');
+        const response = await getUsers();
         this.setState({users: response.data});
     };
 

@@ -17,7 +17,7 @@ export default class Navigation extends Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item active">
-                                <Link className="nav-link" to="users">Users</Link>
+                                <Link className="nav-link" to="/users">Users</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <Link
