@@ -5,10 +5,6 @@ import Task from '../../components/task/Task';
 
 export default class TasksList extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         tasks: []
     };

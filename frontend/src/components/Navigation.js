@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 
 export default class Navigation extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
@@ -23,10 +20,10 @@ export default class Navigation extends Component {
                                 <Link className="nav-link" to="users">Users</Link>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Tasks
-                                </a>
+                                <Link
+                                    className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                >Tasks</Link>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/">All</Link>
                                     <Link className="dropdown-item" to="/create">Create</Link>

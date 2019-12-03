@@ -4,10 +4,6 @@ import axios from "axios";
 
 export default class TaskForm extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         tasks: [],
         users: [],
@@ -15,12 +11,30 @@ export default class TaskForm extends Component {
         title: '',
         content: '',
         author: '',
-        date: new Date()
+        date: new Date(),
+        editing: false
     };
 
-    componentDidMount() {
+    async componentDidMount() {
+        if(this.props.id){
+            const {title, content, author, date} = await this.getTaskById(this.props.id);
+
+            this.setState({
+                editing: true,
+                title,
+                content,
+                author,
+                date: new Date(date)
+            });
+        }
+
         this.getUsers();
     }
+
+    getTaskById = async id => {
+        const response = await axios.get(`http://localhost:4000/api/tasks/${id}`);
+        return response.data;
+    };
 
     getUsers = async () => {
         const response = await axios.get('http://localhost:4000/api/users');
@@ -39,15 +53,26 @@ export default class TaskForm extends Component {
 
         const {title, content, author, date} = this.state;
         const {redirect} = this.props;
+        let response;
 
-        const response = await axios.post('http://localhost:4000/api/tasks', {
-            title,
-            content,
-            author,
-            date
-        });
+        if(this.state.editing){
+            response = await axios.put(`http://localhost:4000/api/tasks/${this.props.id}`, {
+                title,
+                content,
+                author,
+                date
+            });
 
-        if(response.status === 201) redirect();
+        }else{
+            response = await axios.post('http://localhost:4000/api/tasks', {
+                title,
+                content,
+                author,
+                date
+            });
+        }
+
+        if(response.status === 201 || response.status === 200) redirect();
         else alert(' No get data ');
     };
 
@@ -71,12 +96,14 @@ export default class TaskForm extends Component {
                         id="author"
                         required
                         className="form-control"
+                        value={this.state.author}
                         onChange={this.handleInput}
                     >
                         <option value="">-- Select user --</option>
                         {
                             this.state.users.map(user => <option key={user._id}
-                                                                 value={user.username}>{user.username}</option>)
+                                                                 value={user.username}
+                            >{user.username}</option>)
                         }
                     </select>
                 </section>

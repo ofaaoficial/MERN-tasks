@@ -3,10 +3,6 @@ import TaskForm from '../../components/task/TaskForm';
 
 export default class TasksCreate extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     redirect = () => this.props.history.push('/');
 
     render() {

@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import axios from "axios";
 
 export default class User extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     deleteUser = async id => {
         const {getUsers} = this.props;

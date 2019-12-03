@@ -9,10 +9,6 @@ export default class UserList extends Component {
         users: [],
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.getUsers()
     }

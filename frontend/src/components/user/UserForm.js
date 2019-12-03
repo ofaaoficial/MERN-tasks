@@ -7,10 +7,6 @@ export default class UserForm extends Component {
         username: ''
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     handleUsername = event => {
         event.preventDefault();
         this.setState({username: event.target.value});
