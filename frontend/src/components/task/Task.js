@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {format} from "timeago.js";
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 export default class Task extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     deleteTask = async id => {
         const {getTasks} = this.props;
@@ -15,19 +13,12 @@ export default class Task extends Component {
 
     };
 
-    editTask = id => {
-        console.log('edit');
-    };
 
     render() {
         return (
             <article className="card">
                 <section className="card-header">
-                    <button
-                        className="btn btn-outline-success float-right"
-                        onClick={() => this.editTask(this.props.task._id)}>
-                        Edit
-                    </button>
+                    <Link className="btn btn-outline-success float-right" to={`/edit/${this.props.task._id}`}>Edit</Link>
                     <h2>{this.props.task.title}</h2>
                 </section>
                 <section className="card-body">
