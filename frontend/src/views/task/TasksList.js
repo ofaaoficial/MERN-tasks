@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.min.css';
 import Task from '../../components/task/Task';
+import {getTasks} from '../../resources/Tasks';
 
 export default class TasksList extends Component {
 
@@ -14,7 +14,7 @@ export default class TasksList extends Component {
     }
 
     getTasks = async () => {
-        const response = await axios.get('http://localhost:4000/api/tasks');
+        const response = await getTasks();
         this.setState({
             tasks: response.data
         });
@@ -28,7 +28,7 @@ export default class TasksList extends Component {
                     {
                         this.state.tasks.map(task =>
                             <section className="col-md-4 p-2" key={task._id}>
-                                <Task task={task} getTasks={this.getTasks}/>
+                                <Task task={task} callGetTasks={this.getTasks}/>
                             </section>
                         )
                     }

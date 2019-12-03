@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DatePicker from "react-datepicker";
-import axios from "axios";
+import {getTaskById, updateTask, newTask} from '../../resources/Tasks';
+import {getUsers} from "../../resources/Users";
 
 export default class TaskForm extends Component {
 
@@ -32,12 +33,12 @@ export default class TaskForm extends Component {
     }
 
     getTaskById = async id => {
-        const response = await axios.get(`http://localhost:4000/api/tasks/${id}`);
+        const response = await getTaskById(id);
         return response.data;
     };
 
     getUsers = async () => {
-        const response = await axios.get('http://localhost:4000/api/users');
+        const response = await getUsers();
         this.setState({
             users: response.data.map(user => {
                 return {
@@ -52,19 +53,18 @@ export default class TaskForm extends Component {
         event.preventDefault();
 
         const {title, content, author, date} = this.state;
-        const {redirect} = this.props;
+        const {redirect, id} = this.props;
         let response;
 
         if(this.state.editing){
-            response = await axios.put(`http://localhost:4000/api/tasks/${this.props.id}`, {
+            response = await updateTask(id, {
                 title,
                 content,
                 author,
                 date
             });
-
         }else{
-            response = await axios.post('http://localhost:4000/api/tasks', {
+            response = await newTask({
                 title,
                 content,
                 author,

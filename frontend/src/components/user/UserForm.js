@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from "axios";
+import {newUser} from '../../resources/Users';
 
 export default class UserForm extends Component {
 
@@ -16,9 +16,7 @@ export default class UserForm extends Component {
         const {getUsers} = this.props;
 
         event.preventDefault();
-        const response = await axios.post('http://localhost:4000/api/users', {
-            username: this.state.username
-        });
+        const response = await newUser({ username: this.state.username});
 
         if(response.status === 201) getUsers();
         else alert("No get data");
